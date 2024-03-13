@@ -1,0 +1,11 @@
+[33mcommit fca6f5c0bb9d15e3706442a9c933686c983badd9[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: kn-eya <eyakousseni@gmail.com>
+Date:   Thu Mar 7 18:11:03 2024 +0100
+
+    Add changes to StudentController.java
+
+[33mcommit ea49357b0572312b45e49cfff137092ffd41bf50[m
+Author: kn-eya <eyakousseni@gmail.com>
+Date:   Thu Mar 7 14:21:50 2024 +0100
+
+    intializing spring boot project
