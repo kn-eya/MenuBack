@@ -1,46 +1,25 @@
-package com.example.back.back.entities;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-import jakarta.persistence.*;
-import jakarta.persistence.OneToMany;
+package com.example.back.back.dtos;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-@Entity
 
-public class Evenement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Evenementdtos {
     private Long id;
     private String description;
     private LocalDateTime datetHeureD;
     private LocalDateTime datetHeureF;
     private  String file;
-@ManyToOne
-private Market marketevenement;
+    private Long Marketid;
 
-    public Market getMarketevenement() {
-        return marketevenement;
+    public Evenementdtos() {
     }
 
-    public void setMarketevenement(Market marketevenement) {
-        this.marketevenement = marketevenement;
-    }
-
-    public Evenement() {
-    }
-
-    public Evenement(Long id, String description,LocalDateTime datetHeureD, LocalDateTime datetHeureF, String file) {
+    public Evenementdtos(Long id, String description, LocalDateTime datetHeureD, LocalDateTime datetHeureF, String file, Long marketid) {
         this.id = id;
         this.description = description;
         this.datetHeureD = datetHeureD;
         this.datetHeureF = datetHeureF;
         this.file = file;
-
-
+        Marketid = marketid;
     }
 
     public Long getId() {
@@ -81,5 +60,13 @@ private Market marketevenement;
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public Long getMarketid() {
+        return Marketid;
+    }
+
+    public void setMarketid(Long marketid) {
+        Marketid = marketid;
     }
 }

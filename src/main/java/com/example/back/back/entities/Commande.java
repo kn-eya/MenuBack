@@ -17,13 +17,47 @@ public class Commande {
     private int tablenumb;
     private String name;
     private String statuscommand;
+
+
+
+
+
+
+
+    public List<Lignedecommandes> getLignedecommandes() {
+        return lignedecommandes;
+    }
+
+    public void setLignedecommandes(List<Lignedecommandes> lignedecommandes) {
+        this.lignedecommandes = lignedecommandes;
+    }
+
+    public Market getMarketcommande() {
+        return marketcommande;
+    }
+
+    public void setMarketcommande(Market marketcommande) {
+        this.marketcommande = marketcommande;
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+
     @OneToMany(mappedBy = "commande")
      private List<Lignedecommandes> lignedecommandes =new ArrayList<Lignedecommandes>();
     @ManyToOne
     private Market marketcommande;
     @OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name="Feedbackid")
-private Feedback feedback;
+    @JoinColumn(name="Feedbackid")
+    private Feedback feedback;
+
+
+
    public Long getCommandeid() {
         return Commandeid;
     }
@@ -79,6 +113,7 @@ private Feedback feedback;
         this.tablenumb = tablenumb;
         this.name = name;
         this.statuscommand = statuscommand;
+
     }
 
 }

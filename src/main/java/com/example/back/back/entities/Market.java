@@ -1,5 +1,6 @@
 package com.example.back.back.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -13,7 +14,7 @@ public class Market {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int id;
+    private Long Marketid;
 
     public String libelle;
     public int phonenumber;
@@ -22,29 +23,56 @@ public class Market {
     public String email;
     public String logo;
     public String media;
+
     @OneToMany(mappedBy = "market")
     private List<Categorie> categorieList = new ArrayList<Categorie>();
+
     @OneToMany(mappedBy = "market")
     private List<MarketLangue> marketLangues =new ArrayList<MarketLangue>();
-  @OneToMany(mappedBy = "marketcommande")
-  private List<Commande>commandes=new ArrayList<>();
-  @OneToMany(mappedBy = "marketfeedback")
-  private List<Feedback> feedbacks=new ArrayList<Feedback>();
-@OneToMany(mappedBy = "marketevenement")
-private List<Evenement> evenements= new ArrayList<Evenement>();
+
+   @OneToMany(mappedBy = "marketcommande")
+   private List<Commande>commandes=new ArrayList<>();
+
+   @OneToMany(mappedBy = "marketfeedback")
+   private List<Feedback> feedbacks=new ArrayList<Feedback>();
+
+   @OneToMany(mappedBy = "marketevenement")
+   private List<Evenement> evenements= new ArrayList<Evenement>();
 
 
 
-
-public Market() {
+    public Market() {
     }
 
-    public int getId() {
-        return id;
+    public Long getMarketid() {
+        return Marketid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+
+    public void setMarketid(Long marketid) {
+        Marketid = marketid;
+    }
+
+
+
+    public Market(Long Marketid, String libelle, int phonenumber, String addresse, String email, String logo, String media) {
+        this.Marketid = Marketid;
+        this.libelle = libelle;
+        this.phonenumber = phonenumber;
+        this.addresse = addresse;
+        this.email = email;
+        this.logo = logo;
+        this.media = media;
+
+    }
+
+    public Long getId() {
+        return Marketid;
+    }
+
+    public void setId(Long Marketid) {
+        this.Marketid = Marketid;
     }
 
     public String getLibelle() {
@@ -55,11 +83,11 @@ public Market() {
         this.libelle = libelle;
     }
 
-    public Integer getPhonenumber() {
+    public int getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
+    public void setPhonenumber(int phonenumber) {
         this.phonenumber = phonenumber;
     }
 
@@ -95,14 +123,43 @@ public Market() {
         this.media = media;
     }
 
-    public Market(Integer id, String libelle, Integer phonenumber, String addresse, String email, String logo, String media) {
-        this.id = id;
-        this.libelle = libelle;
-        this.phonenumber = phonenumber;
-        this.addresse = addresse;
-        this.email = email;
-        this.logo = logo;
-        this.media = media;
+    public List<Categorie> getCategorieList() {
+        return categorieList;
     }
 
+    public void setCategorieList(List<Categorie> categorieList) {
+        this.categorieList = categorieList;
+    }
+
+    public List<MarketLangue> getMarketLangues() {
+        return marketLangues;
+    }
+
+    public void setMarketLangues(List<MarketLangue> marketLangues) {
+        this.marketLangues = marketLangues;
+    }
+
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public List<Evenement> getEvenements() {
+        return evenements;
+    }
+
+    public void setEvenements(List<Evenement> evenements) {
+        this.evenements = evenements;
+    }
 }
