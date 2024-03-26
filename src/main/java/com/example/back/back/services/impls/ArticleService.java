@@ -28,7 +28,7 @@ public class ArticleService implements IArticle {
     }
 
     @Override
-    public void deleteOne(long id) {
+    public void deleteOne(Long id) {
         articleRepository.deleteById(id);
     }
 

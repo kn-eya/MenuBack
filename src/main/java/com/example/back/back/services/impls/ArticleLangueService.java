@@ -33,7 +33,7 @@ public class ArticleLangueService implements IArticleLangue {
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         articleLangueRepository.deleteById(id);
     }
 

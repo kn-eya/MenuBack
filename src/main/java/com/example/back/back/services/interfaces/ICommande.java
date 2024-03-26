@@ -9,6 +9,6 @@ public interface ICommande {
     public List<Commande> getList() ;
     public Commande  getOne (Long id) ;
     public  Commande  create(Commande commande) ;
-    public  void deteletOne(long id);
+    public  void deleteOne(Long id);
     public  Commande update (Commande commande);
 }

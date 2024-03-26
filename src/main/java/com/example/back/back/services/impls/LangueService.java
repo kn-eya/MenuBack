@@ -30,7 +30,7 @@ public class LangueService implements ILangue{
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         langueRepository.deleteById(id);
     }
 

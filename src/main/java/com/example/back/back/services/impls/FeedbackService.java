@@ -28,7 +28,7 @@ public class FeedbackService implements IFeedback {
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         feedbackRepository.deleteById(id);
     }
 

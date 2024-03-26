@@ -11,7 +11,7 @@ public interface IFeedback {
 
     Feedback create(Feedback feedback);
 
-    void deteletOne(long id);
+    void deleteOne(Long id);
 
     Feedback update(Feedback feedback);
 }

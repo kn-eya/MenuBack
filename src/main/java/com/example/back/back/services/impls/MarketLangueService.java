@@ -30,7 +30,7 @@ public class MarketLangueService implements IMarketLangue {
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         marketLangueRepository.deleteById(id);
     }
 

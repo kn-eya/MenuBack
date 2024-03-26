@@ -9,6 +9,6 @@ public interface IMarketLangue {
     public List<MarketLangue > getList() ;
     public MarketLangue  getOne (Long id) ;
     public  MarketLangue  create(MarketLangue marketLangue) ;
-    public  void deteletOne(long id);
+    public  void deleteOne(Long id);
     public MarketLangue update (MarketLangue marketLangue);
 }

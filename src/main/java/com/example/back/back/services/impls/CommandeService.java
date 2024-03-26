@@ -30,7 +30,7 @@ public class CommandeService implements ICommande {
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         commandeRepository.deleteById(id);
     }
 

@@ -10,7 +10,7 @@ public interface IMarket {
     public List<Market> getList() ;
     public Market  getOne (Long Marketid) ;
     public  Market  create(Market market) ;
-    public  void deleteOne(long id);
+    public  void deleteOne(Long id);
     public  Market update (Market market);
 
     public List<CategorieResponseDto> getCategoeiesWithArticle(@PathVariable Long id);

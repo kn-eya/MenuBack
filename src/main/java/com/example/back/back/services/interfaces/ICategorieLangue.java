@@ -14,7 +14,7 @@ public interface ICategorieLangue {
 
     public  CategorieLangue create(CategorieLangue categorieLangue);
 
-    public void deteletOne(Long id);
+    public void deleteOne(Long id);
 
    public CategorieLangue update(CategorieLangue categorieLangue);
    public  String  getTraductionCategorie (Categorie categorie , Langue langue) ;

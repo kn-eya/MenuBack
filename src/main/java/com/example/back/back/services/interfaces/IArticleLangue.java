@@ -12,7 +12,7 @@ public interface IArticleLangue {
 
     ArticleLangue create(ArticleLangue articleLangue);
 
-    void deteletOne(long id);
+    void deleteOne(Long id);
 
     ArticleLangue update(ArticleLangue articleLangue);
 }

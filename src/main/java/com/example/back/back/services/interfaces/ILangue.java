@@ -9,6 +9,6 @@ public interface ILangue {
     public List<Langue> getList() ;
     public Langue getOne (Long id) ;
     public Langue create(Langue langue) ;
-    public  void deteletOne(long id);
+    public  void deleteOne(Long id);
     public  Langue update (Langue langue);
 }

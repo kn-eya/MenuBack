@@ -31,7 +31,7 @@ public class CategorieLangueService implements ICategorieLangue {
     }
 
     @Override
-    public void deteletOne(Long id) {
+    public void deleteOne(Long id) {
         categorieLangueRepository.deleteById(id);
     }
 

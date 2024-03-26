@@ -28,7 +28,7 @@ public class EvenementService implements IEvenement {
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         evenementRepository.deleteById(id);
     }
 

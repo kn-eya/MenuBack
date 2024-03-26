@@ -11,7 +11,7 @@ public interface IArticle {
     public List<Article> getList() ;
     public Article getOne (Long id) ;
     public  Article  create(Article article) ;
-    public  void deleteOne(long id);
+    public  void deleteOne(Long id);
     public  Article update (Article article);
 
 

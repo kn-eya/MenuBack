@@ -10,6 +10,6 @@ public interface IEvenement {
     public List<Evenement> getList() ;
     public Evenement  getOne (Long id) ;
     public  Evenement create(Evenement evenement) ;
-    public  void deteletOne(long id);
+    public  void deleteOne(Long id);
     public  Evenement update (Evenement evenement);
 }

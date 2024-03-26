@@ -9,7 +9,7 @@ public interface ICategorie {
     public List<Categorie> getList() ;
     public Categorie  getOne (Long id) ;
     public  Categorie  create(Categorie categorie) ;
-    public  void deteletOne(long id);
+    public  void deleteOne(Long id);
     public  Categorie update (Categorie categorie);
 
 }

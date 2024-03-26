@@ -61,7 +61,7 @@ public class MarketController {
         return new ResponseEntity<>(updatedMarket, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{Id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
         iMarket.deleteOne(id);

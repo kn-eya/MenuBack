@@ -32,7 +32,7 @@ public class LignedecommandesService implements ILignedecommandes {
         return  lignedecommandesRepository.save(lignedecommandes);
     }
     @Override
-    public void deleteOne(long id) {
+    public void deleteOne(Long id) {
         lignedecommandesRepository.deleteById(id);
     }
 

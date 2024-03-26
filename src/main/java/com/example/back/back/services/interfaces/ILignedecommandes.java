@@ -10,7 +10,7 @@ public interface ILignedecommandes {
     public List<Lignedecommandes> getList() ;
     public Lignedecommandes  getOne (Long id) ;
     public  Lignedecommandes  create(Lignedecommandes lignedecommandes) ;
-    public  void deleteOne(long id);
+    public  void deleteOne(Long id);
     public  Lignedecommandes update (Lignedecommandes lignedecommandes);
 
 

@@ -30,7 +30,7 @@ public class CategorieService implements ICategorie {
     }
 
     @Override
-    public void deteletOne(long id) {
+    public void deleteOne(Long id) {
         categorieRepository.deleteById(id);
     }
 

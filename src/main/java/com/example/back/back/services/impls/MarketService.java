@@ -35,7 +35,7 @@ public class MarketService implements IMarket {
     }
 
     @Override
-    public void deleteOne(long id) {
+    public void deleteOne(Long id) {
          marketRepository.deleteById(id);
     }
 
