@@ -1,8 +1,7 @@
 package com.example.back.back.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 public class CategorieLangue {

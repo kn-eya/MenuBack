@@ -1,10 +1,11 @@
 package com.example.back.back.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.*;
+import org.apache.catalina.Manager;
+
+import javax.persistence.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ public class Market {
     public String libelle;
     public int phonenumber;
     public String addresse;
-    @Column(unique = true)
     public String email;
     public String logo;
     public String media;
@@ -38,6 +38,8 @@ public class Market {
 
    @OneToMany(mappedBy = "marketevenement")
    private List<Evenement> evenements= new ArrayList<Evenement>();
+   @ManyToOne
+   private  Admin admin ;
 
 
 

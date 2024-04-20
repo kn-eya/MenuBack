@@ -1,8 +1,7 @@
 package com.example.back.back.entities;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.*;
+
+import javax.persistence.*;
+
 @Entity
 public class ArticleLangue {
     @Id

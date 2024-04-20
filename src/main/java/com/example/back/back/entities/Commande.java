@@ -1,11 +1,11 @@
 package com.example.back.back.entities;
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
 
 @Entity
 public class Commande {

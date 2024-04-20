@@ -1,6 +1,8 @@
 package com.example.back.back.api;
 
+import com.example.back.back.dtos.Evenementdtos;
 import com.example.back.back.dtos.Feedbackdtos;
+import com.example.back.back.entities.Evenement;
 import com.example.back.back.entities.Feedback;
 import com.example.back.back.services.interfaces.ICommande;
 import com.example.back.back.services.interfaces.IFeedback;
@@ -10,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/feedbacks")
@@ -46,6 +51,14 @@ public class FeedbackController {
          Feedback created= iFeedback.create(feedback);
         return new ResponseEntity<>(modelMapper.map(created,Feedbackdtos.class), HttpStatus.CREATED);
     }
+    @GetMapping("/allfeed")
+    public ResponseEntity<List<Feedbackdtos>> findfeed() {
+        List<Feedback> feedbacks = iFeedback.getList();
+        List<Feedbackdtos> feedbackdtos = feedbacks.stream()
+                .map(feedback -> modelMapper.map(feedback, Feedbackdtos.class))
+                .collect(Collectors.toList());
 
+        return new ResponseEntity<>(feedbackdtos, HttpStatus.OK);
+    }
 
 }

@@ -2,11 +2,11 @@ package com.example.back.back.services.impls;
 
 import com.example.back.back.dtos.CategorieResponseDto;
 import com.example.back.back.entities.Categorie;
-import com.example.back.back.entities.Langue;
 import com.example.back.back.entities.Market;
 import com.example.back.back.repositories.MarketRepository;
 import com.example.back.back.services.interfaces.ICategorieLangue;
 import com.example.back.back.services.interfaces.IMarket;
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +28,7 @@ public class MarketService implements IMarket {
     public Market getOne(Long id) {
         return marketRepository.findById(id).get();
     }
+
 
     @Override
     public Market create(Market market) {
@@ -60,6 +61,13 @@ public class MarketService implements IMarket {
 
         return categoriesArticle;
     }
+
+    @Override
+    public Market findByEmail(String email) {
+        return marketRepository.findByEmail(email);
+    }
+
+
     private CategorieResponseDto mapCategorieToDTO(Categorie categorie) {
         CategorieResponseDto categorieDTO = new CategorieResponseDto();
         categorieDTO.setId(categorie.getCategorieid());

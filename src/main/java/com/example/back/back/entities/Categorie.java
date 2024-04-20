@@ -1,14 +1,9 @@
 package com.example.back.back.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
@@ -23,9 +18,9 @@ public class Categorie {
     @JoinColumn(name = "sup_categorie_id")
     private Categorie supCategorie;
    @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
+  //  @LazyCollection(LazyCollectionOption.FALSE)
 
-    @OneToMany(mappedBy = "supCategorie")
+    @OneToMany(mappedBy = "supCategorie",fetch = FetchType.LAZY)
     private List<Categorie> sousCategorie;
 
     @OneToMany(mappedBy = "categorie")
@@ -34,7 +29,7 @@ public class Categorie {
     @OneToMany(mappedBy = "categorie")
     private List<CategorieLangue> categorieLangues=new ArrayList<CategorieLangue>();
     @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
+    //@LazyCollection(LazyCollectionOption.FALSE)
    @ManyToOne
     private Market market  ;
 

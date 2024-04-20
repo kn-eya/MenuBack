@@ -1,8 +1,7 @@
 package com.example.back.back.entities;
 
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 

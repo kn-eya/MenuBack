@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface MarketRepository extends JpaRepository<Market,Long>, CrudRepository<Market, Long> {
     void deleteById(Long ID);
+    Market  findByEmail(String email);
 
 
 }

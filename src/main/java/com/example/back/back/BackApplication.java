@@ -3,6 +3,10 @@ package com.example.back.back;
 import com.example.back.back.entities.Article;
 import com.example.back.back.entities.Categorie;
 import com.example.back.back.entities.Market;
+import com.example.back.back.entities.SuperAdmin;
+import com.example.back.back.security.entities.AppRole;
+import com.example.back.back.security.entities.AppUser;
+import com.example.back.back.security.services.IAccountService;
 import com.example.back.back.services.AppConfig;
 import com.example.back.back.services.interfaces.IArticle;
 import com.example.back.back.services.interfaces.ICategorie;
@@ -12,6 +16,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.ArrayList;
 
 
 @SpringBootApplication
@@ -22,12 +30,37 @@ public class BackApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackApplication.class, args);
 	}
+    //@Bean
+	PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+}
+
+
 
 	@Bean
-	CommandLineRunner start(IArticle iArticle, IMarket iMarket, ICategorie iCategorie){
+	CommandLineRunner start(IArticle iArticle, IAccountService iAccountService, IMarket iMarket, ICategorie iCategorie){
 		return args -> {
-			Market market = new Market();
+
+			SuperAdmin sp = new SuperAdmin();
+			sp.setUserName("admin");
+			sp.setPassword("password");
+
+            iAccountService.addNewRole(new AppRole(null,"SuperAdmin"));
+		    iAccountService.addNewRole(new AppRole(null,"Admin"));
+		    iAccountService.addNewRole(new AppRole(null,"Manager"));
+
+		    iAccountService.addNewUser(new AppUser(null,"user", "user1","1234",new ArrayList<>()));
+			iAccountService.addNewUser(new AppUser(null,"user", "user2","1234",new ArrayList<>()));
+			iAccountService.addNewUser(new AppUser(null,"user", "user3","1234",new ArrayList<>()));
+		    iAccountService.addRoleToUser("user1","SuperAdmin");
+			iAccountService.addRoleToUser("user2","Admin");
+			iAccountService.addRoleToUser("user3","Manager");
+
+
+
+			/*Market market = new Market();
 			market.setLibelle("ELhaj");
+			market.setEmail("a@a.com");
 			iMarket.create(market);
 
 			Categorie categorie = new Categorie();
@@ -131,7 +164,7 @@ public class BackApplication {
 			glaceuneBoule.setTitle("glace une boules");
 			glaceuneBoule.setPrix(10.00);
 			glaceuneBoule.setCategorie(glace);
-			iArticle.create(glaceuneBoule);
+			iArticle.create(glaceuneBoule);*/
 
 
 

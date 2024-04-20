@@ -1,5 +1,9 @@
 package com.example.back.back.dtos;
 
+
+
+
+
 public class ArticleLanguedtos {
     private int id;
     public Long Articleid;

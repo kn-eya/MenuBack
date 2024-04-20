@@ -1,15 +1,13 @@
 package com.example.back.back.entities;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
 
 @Entity
 
@@ -27,16 +25,16 @@ public class Article {
 
     public Long   categorieId ;
    @JsonIgnore
-   @LazyCollection(LazyCollectionOption.FALSE)
+   //@LazyCollection(LazyCollectionOption.FALSE)
     @ManyToOne
     public Categorie categorie;
     @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
-   @OneToMany(mappedBy = "article")
+   // @LazyCollection(LazyCollectionOption.FALSE)
+   @OneToMany(mappedBy = "article",fetch = FetchType.LAZY)
    private List<Lignedecommandes> lignedecommandes =new ArrayList<>();
     @JsonIgnore
-    @LazyCollection(LazyCollectionOption.FALSE)
-   @OneToMany(mappedBy = "article")
+   // @LazyCollection(LazyCollectionOption.FALSE)
+   @OneToMany(mappedBy = "article",fetch = FetchType.LAZY)
    private List<ArticleLangue> articleLangues = new ArrayList<ArticleLangue>();
 
     public Article() {
