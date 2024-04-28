@@ -20,6 +20,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
+import java.util.List;
+
 import com.example.back.back.security.services.*;
 
 
@@ -36,13 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     auth.userDetailsService(userDetailsService);
 
     }
+
+
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-      //  configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //or add * to allow all origins
-        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));        configuration.setAllowCredentials(true);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); //to set allowed http methods
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("custom-header1", "custom-header2"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -60,11 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        http.authorizeRequests()
                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**").permitAll();
 
-       // http.authorizeRequests().antMatchers("http://localhost:8080/swagger-ui/index.html").permitAll();
+        http.authorizeRequests().antMatchers("http://localhost:8080/swagger-ui/index.html").permitAll();
 
+  http.cors();
 
-
-     //  http.cors().and().authorizeRequests().anyRequest().permitAll().and().csrf().disable();
+     // http.cors().and().authorizeRequests().anyRequest().permitAll().and().csrf().disable();
        http.authorizeRequests().anyRequest().authenticated();
         http.addFilterAt(jwtAuth,UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new JwtAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -36,7 +36,7 @@ public class Categorie {
     public Categorie() {
     }
 
-    public Categorie(long categorieid, String libelle, int niveau, Categorie supCategorie, List<Categorie> sousCategorie, List<Article> articleList, List<CategorieLangue> categorieLangues, Market market) {
+    public Categorie(Long categorieid, String libelle, int niveau, Categorie supCategorie, List<Categorie> sousCategorie, List<Article> articleList, List<CategorieLangue> categorieLangues, Market market) {
         Categorieid = categorieid;
         this.libelle = libelle;
         this.niveau = niveau;
@@ -51,13 +51,10 @@ public class Categorie {
         Categorieid = categorieid;
     }
 
-    public long getCategorieid() {
+    public Long getCategorieid() {
         return Categorieid;
     }
 
-    public void setCategorieid(long categorieid) {
-        Categorieid = categorieid;
-    }
 
     public String getLibelle() {
         return libelle;

@@ -58,7 +58,7 @@ public class BackApplication {
 
 
 
-			/*Market market = new Market();
+			Market market = new Market();
 			market.setLibelle("ELhaj");
 			market.setEmail("a@a.com");
 			iMarket.create(market);
@@ -164,7 +164,7 @@ public class BackApplication {
 			glaceuneBoule.setTitle("glace une boules");
 			glaceuneBoule.setPrix(10.00);
 			glaceuneBoule.setCategorie(glace);
-			iArticle.create(glaceuneBoule);*/
+			iArticle.create(glaceuneBoule);
 
 
 

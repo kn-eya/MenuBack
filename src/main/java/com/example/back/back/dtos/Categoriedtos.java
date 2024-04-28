@@ -5,6 +5,15 @@ import org.apache.juli.logging.Log;
 
 public class Categoriedtos {
     private Long Categorieid;
+
+    public Long getCategorieid() {
+        return Categorieid;
+    }
+
+    public void setCategorieid(Long categorieid) {
+        Categorieid = categorieid;
+    }
+
     private String libelle;
     private int niveau;
     private Long supCategorieId;
@@ -21,13 +30,6 @@ public class Categoriedtos {
         this.Marketid = marketid;
     }
 
-    public Long getCategorieid() {
-        return Categorieid;
-    }
-
-    public void setCategorieid(Long categorieid) {
-        Categorieid = categorieid;
-    }
 
     public String getLibelle() {
         return libelle;

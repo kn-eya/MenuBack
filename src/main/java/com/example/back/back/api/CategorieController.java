@@ -2,8 +2,10 @@ package com.example.back.back.api;
 
 import com.example.back.back.dtos.Categoriedtos;
 
+import com.example.back.back.dtos.Evenementdtos;
 import com.example.back.back.entities.Categorie;
 
+import com.example.back.back.entities.Evenement;
 import com.example.back.back.repositories.CategorieRepository;
 import com.example.back.back.services.interfaces.ICategorie;
 import com.example.back.back.services.interfaces.IMarket;
@@ -12,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -58,6 +63,16 @@ public class CategorieController {
         }
         return  new ResponseEntity<>( ctdos, HttpStatus.OK);
 }
+
+@GetMapping("/all")
+    public ResponseEntity<List<Categoriedtos>> findCategories() {
+        List<Categorie> categories = iCategorie.getList();
+        List<Categoriedtos> categorieDtos = categories.stream()
+                .map(categorie -> modelMapper.map(categorie, Categoriedtos.class))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(categorieDtos, HttpStatus.OK);
+    }
      /*  @GetMapping("/tt/{id}")
     public  ResponseEntity<Categorie>  tt(@PathVariable long id)  {
        return   new ResponseEntity<>(iCategorie.getOne(id),HttpStatus.OK);

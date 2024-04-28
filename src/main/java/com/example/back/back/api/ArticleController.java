@@ -59,6 +59,12 @@ public class ArticleController {
                 .stream().filter(a->a.getCategorie().getCategorieid()==idCategorie).map(al->modelMapper.map(al,Articledtos.class))
                 .collect(Collectors.toList())));
     }
+    @GetMapping("all")
+    public ResponseEntity<List<Articledtos>> getAll() {
+        return  ResponseEntity.ok(( iArticle.getList()
+                .stream().map(al->modelMapper.map(al,Articledtos.class))
+                .collect(Collectors.toList())));
+    }
 
 
 
