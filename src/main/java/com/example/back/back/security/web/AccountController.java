@@ -4,11 +4,16 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.back.back.entities.Admin;
+import com.example.back.back.entities.Manager;
 import com.example.back.back.security.dto.RoleUserForm;
+import com.example.back.back.security.dto.UserRequestDto;
 import com.example.back.back.security.entities.AppRole;
 import com.example.back.back.security.entities.AppUser;
 import com.example.back.back.security.services.IAccountService;
 import com.example.back.back.security.utils.JwtUtil;
+import com.example.back.back.services.interfaces.IAdmin;
+import com.example.back.back.services.interfaces.IManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -30,6 +35,10 @@ import java.util.stream.Collectors;
 public class AccountController {
     @Autowired
     private IAccountService _iAccountService ;
+    @Autowired
+    private IAdmin adminService ;
+    @Autowired
+    private IManager managerService ;
     @GetMapping("/users")
     public List<AppUser>  getAllUsers (){
       return   _iAccountService.users();
@@ -38,6 +47,22 @@ public class AccountController {
     public AppUser  getUserByUserName (@PathVariable String userName){
 
         return   _iAccountService.loadUserByUserName(userName);
+    }
+
+    @GetMapping("/managers/{username}")
+    public List<Manager> getManagerByAdmin(@PathVariable String username){
+        System.out.println(username);
+        System.out.println("api manager");
+
+        AppUser admin = this.getUserByUserName(username);
+        return   managerService.getListByAdmin(admin);
+    }
+    @GetMapping("/admins")
+    public List<Admin> getAdmins(){
+        System.out.println("api admin");
+
+
+        return   adminService.getList();
     }
 
     @PostMapping("/addUser")
@@ -101,6 +126,33 @@ public class AccountController {
     @GetMapping("/profile")
     public  AppUser profile(Principal principal) {
         return  _iAccountService.loadUserByUserName(principal.getName());
+    }
+
+    @PostMapping("/registre")
+    public  void createUser(@RequestBody UserRequestDto userRequestDto){
+        Admin admin;
+        Manager manager  ;
+        if(userRequestDto.getRoleName()=="Admin") {
+            manager= new Manager() ;
+            manager.setUserName(userRequestDto.getUserName());
+            manager.setNom(userRequestDto.getNom());
+            manager.setPassword(userRequestDto.getPassword());
+            AppUser userConnectee=_iAccountService.loadUserByUserName(userRequestDto.getUserNameConnectee());
+            manager.setAdmin(adminService.getOne(userConnectee.getId()));
+            Manager managerSaved= managerService.create(manager);
+            _iAccountService.addRoleToUser(managerSaved.getUserName(),"Manager");
+
+        }
+        else
+        {
+            admin = new Admin();
+            admin.setUserName(userRequestDto.getUserName());
+            admin.setNom(userRequestDto.getNom());
+            admin.setPassword(userRequestDto.getPassword());
+            Admin adminSavec = adminService.create(admin);
+            _iAccountService.addRoleToUser(adminSavec.getUserName(),"Admin");
+
+        }
     }
 
 

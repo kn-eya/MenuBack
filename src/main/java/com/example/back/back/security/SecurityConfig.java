@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        http.authorizeRequests()
                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**").permitAll();
 
-        http.authorizeRequests().antMatchers("http://localhost:8080/swagger-ui/index.html").permitAll();
+        http.authorizeRequests().antMatchers("http://localhost:8081/swagger-ui/index.html").permitAll();
 
   http.cors();
 

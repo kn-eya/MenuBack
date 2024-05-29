@@ -4,6 +4,7 @@ import com.example.back.back.dtos.Evenementdtos;
 import com.example.back.back.dtos.Feedbackdtos;
 import com.example.back.back.entities.Evenement;
 import com.example.back.back.entities.Feedback;
+import com.example.back.back.repositories.FeedbackRepository;
 import com.example.back.back.services.interfaces.ICommande;
 import com.example.back.back.services.interfaces.IFeedback;
 import com.example.back.back.services.interfaces.IMarket;
@@ -27,6 +28,8 @@ public class FeedbackController {
     public ICommande iCommande;
     @Autowired
     private ModelMapper modelMapper ;
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
 
     @PostMapping("/createFeedCmd")
@@ -60,5 +63,23 @@ public class FeedbackController {
 
         return new ResponseEntity<>(feedbackdtos, HttpStatus.OK);
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Feedbackdtos> updateMarket(@PathVariable Long id, @RequestBody Feedbackdtos updatedMarket) {
 
+        Feedback feedback = iFeedback.getOne(id);
+        feedback.setMessage(updatedMarket.getMessage());
+
+
+        feedback = feedbackRepository.save(feedback);
+
+        return new ResponseEntity<>(modelMapper.map( feedback, Feedbackdtos.class), HttpStatus.OK);
+
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+
+        iFeedback.getOne(id);
+        iFeedback.deleteOne(id);
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
 }

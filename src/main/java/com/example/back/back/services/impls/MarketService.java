@@ -67,6 +67,11 @@ public class MarketService implements IMarket {
         return marketRepository.findByEmail(email);
     }
 
+    @Override
+    public List<Market> findMarketsbyUserName(String userName) {
+        return  this.getList().stream().filter(m->m.getAdmin().getUserName()==userName).collect(Collectors.toList());
+    }
+
 
     private CategorieResponseDto mapCategorieToDTO(Categorie categorie) {
         CategorieResponseDto categorieDTO = new CategorieResponseDto();

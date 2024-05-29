@@ -23,10 +23,11 @@ public class Article {
 
 
 
-    public Long   categorieId ;
+
    @JsonIgnore
    //@LazyCollection(LazyCollectionOption.FALSE)
     @ManyToOne
+   @JoinColumn(name = "Categorieid")
     public Categorie categorie;
     @JsonIgnore
    // @LazyCollection(LazyCollectionOption.FALSE)
@@ -46,13 +47,6 @@ public class Article {
 
     public Categorie getCategorie() {
         return categorie;
-    }
-    public Long getCategorieId() {
-        return categorieId;
-    }
-
-    public void setCategorieId(Long categorieId) {
-        this.categorieId = categorieId;
     }
 
     public Long getArticleid() {
@@ -88,11 +82,11 @@ public class Article {
         this.description = description;
     }
 
-    public Article(Long Articleid, String title, Double prix, String description,   Long   categorieId ) {
+    public Article(Long Articleid, String title, Double prix, String description ) {
         this.Articleid = Articleid;
         this.title = title;
         this.prix = prix;
         this.description = description;
-        this.categorieId = categorieId;
+
  ;   }
 }

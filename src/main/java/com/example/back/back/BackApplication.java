@@ -1,16 +1,12 @@
 package com.example.back.back;
 
-import com.example.back.back.entities.Article;
-import com.example.back.back.entities.Categorie;
-import com.example.back.back.entities.Market;
-import com.example.back.back.entities.SuperAdmin;
+import com.example.back.back.entities.*;
 import com.example.back.back.security.entities.AppRole;
 import com.example.back.back.security.entities.AppUser;
 import com.example.back.back.security.services.IAccountService;
 import com.example.back.back.services.AppConfig;
-import com.example.back.back.services.interfaces.IArticle;
-import com.example.back.back.services.interfaces.ICategorie;
-import com.example.back.back.services.interfaces.IMarket;
+import com.example.back.back.services.impls.AdminService;
+import com.example.back.back.services.interfaces.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,7 +34,9 @@ public class BackApplication {
 
 
 	@Bean
-	CommandLineRunner start(IArticle iArticle, IAccountService iAccountService, IMarket iMarket, ICategorie iCategorie){
+	CommandLineRunner start(IArticle iArticle, IAccountService iAccountService, IMarket iMarket, ICategorie iCategorie,
+							IAdmin _adminService  , IManager managerService){
+
 		return args -> {
 
 			SuperAdmin sp = new SuperAdmin();
@@ -50,17 +48,33 @@ public class BackApplication {
 		    iAccountService.addNewRole(new AppRole(null,"Manager"));
 
 		    iAccountService.addNewUser(new AppUser(null,"user", "user1","1234",new ArrayList<>()));
-			iAccountService.addNewUser(new AppUser(null,"user", "user2","1234",new ArrayList<>()));
-			iAccountService.addNewUser(new AppUser(null,"user", "user3","1234",new ArrayList<>()));
-		    iAccountService.addRoleToUser("user1","SuperAdmin");
-			iAccountService.addRoleToUser("user2","Admin");
-			iAccountService.addRoleToUser("user3","Manager");
+			Admin admin = new Admin();
+			admin.setNom("ahmed");
+			admin.setUserName("ahmed");
+			admin.setPassword("1234");
+			Admin adminCreated = _adminService.create(admin);
 
+			iAccountService.addRoleToUser("user1","SuperAdmin");
+			iAccountService.addRoleToUser("ahmed","Admin");
+
+
+
+
+			Manager manager = new Manager();
+			manager.setNom("eya");
+			manager.setUserName("eya");
+			manager.setPassword("1234");
+			manager.setAdmin(adminCreated);
+			managerService.create(manager);
+			iAccountService.addRoleToUser("eya","Manager");
 
 
 			Market market = new Market();
 			market.setLibelle("ELhaj");
 			market.setEmail("a@a.com");
+
+
+			market.setAdmin(adminCreated);
 			iMarket.create(market);
 
 			Categorie categorie = new Categorie();

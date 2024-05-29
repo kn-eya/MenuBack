@@ -55,10 +55,15 @@ public class ArticleController {
 
     @GetMapping("getAllbyCategorie/{idCategorie}")
     public ResponseEntity<List<Articledtos>> getAllByCategorie(@PathVariable Long idCategorie) {
-        return  ResponseEntity.ok(( iArticle.getList()
-                .stream().filter(a->a.getCategorie().getCategorieid()==idCategorie).map(al->modelMapper.map(al,Articledtos.class))
-                .collect(Collectors.toList())));
+      System.out.println(idCategorie);
+        return ResponseEntity.ok(iArticle.getList()
+                .stream()
+                .filter(a -> a.getCategorie().getCategorieid() == idCategorie)
+                .map(al -> modelMapper.map(al, Articledtos.class))
+                .collect(Collectors.toList()));
     }
+
+
     @GetMapping("all")
     public ResponseEntity<List<Articledtos>> getAll() {
         return  ResponseEntity.ok(( iArticle.getList()

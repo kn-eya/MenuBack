@@ -1,5 +1,6 @@
 package com.example.back.back.security.services;
 
+import com.example.back.back.entities.Admin;
 import com.example.back.back.security.entities.*;
 
 import java.util.List;
@@ -11,4 +12,7 @@ public interface IAccountService {
     void addRoleToUser(String userName, String roleName);
     AppUser loadUserByUserName(String UserName);
     List<AppUser> users () ;
+
+
+
 }

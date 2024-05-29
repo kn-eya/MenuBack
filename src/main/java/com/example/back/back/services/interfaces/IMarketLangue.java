@@ -1,6 +1,6 @@
 package com.example.back.back.services.interfaces;
 
-import com.example.back.back.entities.Article;
+
 import com.example.back.back.entities.MarketLangue;
 
 import java.util.List;

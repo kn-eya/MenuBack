@@ -16,7 +16,7 @@ public class MenuResponseDto {
 
     public String logo;
     public String media;
-    List<CategorieResponseDto> menu = new ArrayList<>();
+   public  List<CategorieResponseDto> menu = new ArrayList<>();
     public MenuResponseDto() {
     }
 

@@ -2,7 +2,8 @@ package com.example.back.back.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.apache.catalina.Manager;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 
@@ -38,10 +39,30 @@ public class Market {
 
    @OneToMany(mappedBy = "marketevenement")
    private List<Evenement> evenements= new ArrayList<Evenement>();
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
    @ManyToOne
    private  Admin admin ;
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(mappedBy = "marketList")
+    private List<Manager> managerList;
 
+    public Admin getAdmin() {
+        return admin;
+    }
 
+    public List<Manager> getManagerList() {
+        return managerList;
+    }
+
+    public void setManagerList(List<Manager> managerList) {
+        this.managerList = managerList;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
     public Market() {
     }

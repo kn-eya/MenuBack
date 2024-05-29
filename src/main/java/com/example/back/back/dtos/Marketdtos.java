@@ -14,8 +14,15 @@ public class Marketdtos {
     public String email;
     public String logo;
     public String media;
+    public String adminUserName ;
 
+    public String getAdminUserName() {
+        return adminUserName;
+    }
 
+    public void setAdminUserName(String adminUserName) {
+        this.adminUserName = adminUserName;
+    }
 
     public Marketdtos() {
     }

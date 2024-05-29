@@ -1,6 +1,6 @@
 package com.example.back.back.services.interfaces;
 
-import com.example.back.back.entities.Article;
+
 import com.example.back.back.entities.Categorie;
 
 import java.util.List;
@@ -11,5 +11,8 @@ public interface ICategorie {
     public  Categorie  create(Categorie categorie) ;
     public  void deleteOne(Long id);
     public  Categorie update (Categorie categorie);
+    public boolean  HasSubCategorie (Long categorieId) ;
+
+
 
 }

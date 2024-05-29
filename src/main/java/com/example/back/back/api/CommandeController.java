@@ -1,11 +1,14 @@
 package com.example.back.back.api;
 
+import com.example.back.back.dtos.Categoriedtos;
 import com.example.back.back.dtos.Commandedtos;
-import com.example.back.back.dtos.Feedbackdtos;
-import com.example.back.back.dtos.Marketdtos;
+
 import com.example.back.back.entities.Commande;
-import com.example.back.back.entities.Market;
+
+
+import com.example.back.back.repositories.CommandeRepository;
 import com.example.back.back.services.interfaces.ICommande;
+
 import com.example.back.back.services.interfaces.IFeedback;
 import com.example.back.back.services.interfaces.IMarket;
 import org.modelmapper.ModelMapper;
@@ -25,6 +28,8 @@ public class CommandeController {
     public IFeedback iFeedback;
     @Autowired
     private ModelMapper modelMapper ;
+    @Autowired
+    private CommandeRepository commandeRepository;
 
    @PostMapping("/create")
    public ResponseEntity<Commandedtos> createCommande(@RequestBody Commandedtos commandedtos){
@@ -51,6 +56,25 @@ public class CommandeController {
         Commande commande= iCommande.getOne(id);
 
         return  new ResponseEntity<>( modelMapper.map(commande,Commandedtos.class), HttpStatus.OK);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Commandedtos> updateMarket(@PathVariable Long id, @RequestBody Commandedtos updatedMarket) {
+
+         Commande commande = iCommande.getOne(id);
+        commande.setName(updatedMarket.getName());
+        commande.setTablenumb(updatedMarket.getTablenumb());
+
+        commande = commandeRepository.save(commande);
+
+        return new ResponseEntity<>(modelMapper.map( commande, Commandedtos.class), HttpStatus.OK);
+
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+
+        iCommande.getOne(id);
+        iCommande.deleteOne(id);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
 }

@@ -17,6 +17,7 @@ public interface IMarket {
 
     public List<CategorieResponseDto> getCategoeiesWithArticle(@PathVariable Long id);
     public  Market findByEmail(String email);
+    public List<Market> findMarketsbyUserName(String userName);
 
 
 

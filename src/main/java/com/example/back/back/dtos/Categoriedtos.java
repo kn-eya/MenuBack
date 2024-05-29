@@ -5,6 +5,15 @@ import org.apache.juli.logging.Log;
 
 public class Categoriedtos {
     private Long Categorieid;
+     private String SupcategorieLibelle;
+
+    public String getSupcategorieLibelle() {
+        return SupcategorieLibelle;
+    }
+
+    public void setSupcategorieLibelle(String supcategorieLibelle) {
+        SupcategorieLibelle = supcategorieLibelle;
+    }
 
     public Long getCategorieid() {
         return Categorieid;
@@ -18,6 +27,7 @@ public class Categoriedtos {
     private int niveau;
     private Long supCategorieId;
     public Long Marketid;
+    private boolean notHasSubCategories;
 
     public Categoriedtos() {
     }
@@ -30,6 +40,13 @@ public class Categoriedtos {
         this.Marketid = marketid;
     }
 
+    public boolean isNotHasSubCategories() {
+        return notHasSubCategories;
+    }
+
+    public void setNotHasSubCategories(boolean notHasSubCategories) {
+        this.notHasSubCategories = notHasSubCategories;
+    }
 
     public String getLibelle() {
         return libelle;

@@ -3,9 +3,11 @@ package com.example.back.back.api;
 import com.example.back.back.dtos.Categoriedtos;
 
 import com.example.back.back.dtos.Evenementdtos;
+import com.example.back.back.dtos.Marketdtos;
 import com.example.back.back.entities.Categorie;
 
 import com.example.back.back.entities.Evenement;
+import com.example.back.back.entities.Market;
 import com.example.back.back.repositories.CategorieRepository;
 import com.example.back.back.services.interfaces.ICategorie;
 import com.example.back.back.services.interfaces.IMarket;
@@ -66,10 +68,15 @@ public class CategorieController {
 
 @GetMapping("/all")
     public ResponseEntity<List<Categoriedtos>> findCategories() {
-        List<Categorie> categories = iCategorie.getList();
+        List<Categorie> categories = iCategorie.getList().stream().filter(c->c.getSupCategorie()==null).collect(Collectors.toList());
         List<Categoriedtos> categorieDtos = categories.stream()
                 .map(categorie -> modelMapper.map(categorie, Categoriedtos.class))
                 .collect(Collectors.toList());
+        categorieDtos.stream().filter(c->c.getSupCategorieId()!=null).forEach(c->{
+            c.setSupcategorieLibelle(iCategorie.getOne(c.getSupCategorieId()).getLibelle());
+            c.setNotHasSubCategories(!iCategorie.HasSubCategorie(c.getCategorieid()));
+
+        });
 
         return new ResponseEntity<>(categorieDtos, HttpStatus.OK);
     }
@@ -83,4 +90,41 @@ public class CategorieController {
        Categorie categorie = iCategorie.getOne(id);
         return   new ResponseEntity<>(modelMapper.map(categorie,Categoriedtos.class),HttpStatus.OK);
     }*/
+     @PutMapping("/update/{id}")
+     public ResponseEntity<Categoriedtos> updateMarket(@PathVariable Long id, @RequestBody Categoriedtos updatedMarket) {
+
+         Categorie categorie = iCategorie.getOne(id);
+         categorie.setLibelle(updatedMarket.getLibelle());
+         categorie.setNiveau(updatedMarket.getNiveau());
+
+         categorie = categorieRepository.save(categorie);
+
+         return new ResponseEntity<>(modelMapper.map( categorie, Categoriedtos.class), HttpStatus.OK);
+
+     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+
+       iCategorie.getOne(id);
+        iCategorie.deleteOne(id);
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
+    @GetMapping("/findSubCategorieByCategorieId/{categoryId}")
+    public ResponseEntity<List<Categoriedtos>> findSubCategoriesByCategoryId(@PathVariable Long categoryId) {
+        List<Categorie> categories = iCategorie.getList().stream().filter(c->c.getSupCategorie()!=null)
+                .filter(c->c.getSupCategorie().getCategorieid()==categoryId).collect(Collectors.toList());
+        List<Categoriedtos> categorieDtos = categories.stream()
+                .map(categorie -> modelMapper.map(categorie, Categoriedtos.class))
+                .collect(Collectors.toList());
+        categorieDtos.stream().filter(c->c.getSupCategorieId()!=null).forEach(c->{
+            c.setSupcategorieLibelle(iCategorie.getOne(c.getSupCategorieId()).getLibelle());
+            c.setNotHasSubCategories(!iCategorie.HasSubCategorie(c.getCategorieid()));
+
+        });
+
+        return new ResponseEntity<>(categorieDtos, HttpStatus.OK);
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.example.back.back.security.services;
 
 
+import com.example.back.back.entities.Admin;
 import com.example.back.back.security.repositories.AppRoleRepository;
 import com.example.back.back.security.repositories.AppUserRepository;
+import com.example.back.back.services.impls.AdminService;
+import com.example.back.back.services.impls.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,11 @@ public class AccountServiceImpl implements IAccountService {
     private AppUserRepository _appUserRepository;
     @Autowired
     private AppRoleRepository _appRoleRepository ;
+    @Autowired
+    private AdminService _adminService ;
+    @Autowired
+    private ManagerService _managerService ;
+
 
 
 
@@ -58,4 +66,6 @@ public class AccountServiceImpl implements IAccountService {
 
      return    _appUserRepository.findAll();
     }
+
+
 }

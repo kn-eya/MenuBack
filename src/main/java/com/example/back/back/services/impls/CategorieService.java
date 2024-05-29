@@ -39,4 +39,9 @@ public class CategorieService implements ICategorie {
 
         return categorieRepository.save(categorie);
     }
+
+    @Override
+    public boolean HasSubCategorie(Long categorieId) {
+        return  this.getOne(categorieId).getSousCategorie()!=null && this.getOne(categorieId).getSousCategorie().stream().count()>0;
+    }
 }
